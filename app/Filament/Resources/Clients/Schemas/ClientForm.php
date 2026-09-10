@@ -12,6 +12,7 @@ class ClientForm
     public static function configure(Schema $schema): Schema
     {
         return $schema
+            ->columns(1)
             ->components([
                 Section::make('Información del Cliente')
                     ->description('Datos personales o de contacto del propietario')

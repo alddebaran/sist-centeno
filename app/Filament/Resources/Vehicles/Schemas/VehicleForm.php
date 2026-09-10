@@ -11,6 +11,7 @@ class VehicleForm
     public static function configure(Schema $schema): Schema
     {
         return $schema
+            ->columns(1)
             ->components([
                 Select::make('client_id')
                     ->relationship('client', 'id')
@@ -24,6 +25,7 @@ class VehicleForm
                 TextInput::make('anio'),
                 TextInput::make('color'),
                 TextInput::make('kilometraje'),
-            ]);
+            ])
+            ->columns(2);
     }
 }
