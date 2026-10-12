@@ -2,10 +2,10 @@
 
 namespace App\Filament\Resources\Clients\Schemas;
 
-use Filament\Forms\Components\TextInput;
-use Filament\Schemas\Schema;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Section;
+use Filament\Schemas\Schema;
 
 class ClientForm
 {

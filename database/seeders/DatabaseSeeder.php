@@ -2,14 +2,13 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Illuminate\Database\Seeder;
-
 use App\Models\Appointment;
 use App\Models\Client;
+use App\Models\User;
 use App\Models\Vehicle;
 use Carbon\Carbon;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
@@ -53,13 +52,13 @@ class DatabaseSeeder extends Seeder
         $nombres = [
             'Juan', 'Carlos', 'Miguel', 'Luis', 'Jorge', 'José', 'Diego', 'Brayan', 'Piero', 'Christian',
             'Anderson', 'Renato', 'Julio', 'Víctor', 'Manuel', 'Rosa', 'María', 'Carmen', 'Ana', 'Lucía',
-            'Andrea', 'Valeria', 'Fiorella', 'Milagros', 'Patricia', 'Diana', 'Claudia', 'Sandra', 'Roxana', 'Gisella'
+            'Andrea', 'Valeria', 'Fiorella', 'Milagros', 'Patricia', 'Diana', 'Claudia', 'Sandra', 'Roxana', 'Gisella',
         ];
 
         $apellidos = [
             'Quispe', 'Flores', 'Rodríguez', 'Sánchez', 'García', 'Centeno', 'Castillo', 'Carrasco', 'Aguirre',
             'Mendoza', 'Rojas', 'Huamán', 'Mamani', 'Chávez', 'Ramos', 'Torres', 'Díaz', 'Gómez', 'Vargas',
-            'Espinoza', 'Fernández', 'Paredes', 'Morales', 'Gutiérrez', 'Castro', 'Romero', 'Herrera', 'Medina'
+            'Espinoza', 'Fernández', 'Paredes', 'Morales', 'Gutiérrez', 'Castro', 'Romero', 'Herrera', 'Medina',
         ];
 
         $marcasModelos = [
@@ -117,9 +116,9 @@ class DatabaseSeeder extends Seeder
                 'numero_documento' => $dni,
                 'nombres' => $nom,
                 'apellidos' => "{$ape1} {$ape2}",
-                'telefono' => '9' . rand(10000000, 99999999),
-                'email' => strtolower(substr($nom, 0, 1) . $ape1 . $i . '@gmail.com'),
-                'direccion' => 'Av. ' . $apellidos[array_rand($apellidos)] . ' #' . rand(100, 999) . ', Lima',
+                'telefono' => '9'.rand(10000000, 99999999),
+                'email' => strtolower(substr($nom, 0, 1).$ape1.$i.'@gmail.com'),
+                'direccion' => 'Av. '.$apellidos[array_rand($apellidos)].' #'.rand(100, 999).', Lima',
             ]);
 
             $clientesCreados[] = $cliente;
@@ -128,7 +127,7 @@ class DatabaseSeeder extends Seeder
             for ($v = 1; $v <= 2; $v++) {
                 // Placa única con formato peruano ABC-123
                 do {
-                    $letras = chr(rand(65, 90)) . chr(rand(65, 90)) . chr(rand(65, 90));
+                    $letras = chr(rand(65, 90)).chr(rand(65, 90)).chr(rand(65, 90));
                     $numeros = rand(100, 999);
                     $placa = "{$letras}-{$numeros}";
                 } while (in_array($placa, $placasGeneradas));

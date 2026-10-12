@@ -19,10 +19,12 @@ class AppointmentResource extends Resource
     protected static ?string $model = Appointment::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedCalendarDays;
-    //protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    // protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
     protected static ?string $navigationLabel = 'Agenda de Citas';
+
     protected static ?string $modelLabel = 'Cita';
+
     protected static ?string $recordTitleAttribute = 'Citas';
 
     public static function form(Schema $schema): Schema

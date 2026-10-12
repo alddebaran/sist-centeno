@@ -5,12 +5,11 @@ namespace App\Filament\Resources\Appointments\Schemas;
 use App\Models\Vehicle;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Select;
-use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TimePicker;
-use Filament\Schemas\Schema;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Components\Utilities\Get;
+use Filament\Schemas\Schema;
 
 class AppointmentForm
 {
@@ -39,6 +38,7 @@ class AppointmentForm
                                 if (! $clientId) {
                                     return [];
                                 }
+
                                 return Vehicle::where('client_id', $clientId)->pluck('placa', 'id');
                             })
                             ->searchable()
