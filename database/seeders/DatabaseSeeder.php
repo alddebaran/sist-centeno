@@ -109,7 +109,7 @@ class DatabaseSeeder extends Seeder
             $nom = $nombres[array_rand($nombres)];
             $ape1 = $apellidos[array_rand($apellidos)];
             $ape2 = $apellidos[array_rand($apellidos)];
-            $dni = str_pad(70000000 + ($i * 137), 8, '0', STR_PAD_LEFT);
+            $dni = (string) (70000000 + ($i * 137));
 
             $cliente = Client::create([
                 'tipo_documento' => 'DNI',

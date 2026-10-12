@@ -9,6 +9,9 @@ class Vehicle extends Model
 {
     protected $guarded = [];
 
+    /**
+     * @return BelongsTo<Client, $this>
+     */
     public function client(): BelongsTo
     {
         return $this->belongsTo(Client::class);
