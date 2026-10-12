@@ -20,10 +20,12 @@ class ClientResource extends Resource
     protected static ?string $model = Client::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedUserGroup;
-    //protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    // protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
     protected static ?string $navigationLabel = 'Clientes';
+
     protected static ?string $modelLabel = 'Cliente';
+
     protected static ?string $recordTitleAttribute = 'numero_documento';
 
     public static function form(Schema $schema): Schema
