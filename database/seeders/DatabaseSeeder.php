@@ -48,6 +48,11 @@ class DatabaseSeeder extends Seeder
             ]
         );
 
+        User::firstOrCreate(
+            ['email' => 'cliente@centeno.com'],
+            ['name' => 'Cliente Propietario', 'password' => Hash::make('password'), 'role' => 'cliente']
+        );
+
         // 2. Datos base con contexto local
         $nombres = [
             'Juan', 'Carlos', 'Miguel', 'Luis', 'Jorge', 'José', 'Diego', 'Brayan', 'Piero', 'Christian',

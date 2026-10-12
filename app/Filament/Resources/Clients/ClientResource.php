@@ -28,6 +28,15 @@ class ClientResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'numero_documento';
 
+    public static function canAccess(): bool
+    {
+        /** @var \App\Models\User|null $user */
+        $user = auth()->user();
+
+        // Solo Admin y Recepcionista pueden ver el módulo Clientes
+        return $user && in_array($user->role, ['admin', 'recepcionista']);
+    }
+
     public static function form(Schema $schema): Schema
     {
         return ClientForm::configure($schema);

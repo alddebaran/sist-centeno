@@ -27,6 +27,15 @@ class VehicleResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'Vehículo';
 
+    public static function canAccess(): bool
+    {
+        /** @var \App\Models\User|null $user */
+        $user = auth()->user();
+
+        // Admin, Recepcionista y Técnico tienen acceso
+        return $user && in_array($user->role, ['admin', 'recepcionista', 'tecnico']);
+    }
+
     public static function form(Schema $schema): Schema
     {
         return VehicleForm::configure($schema);

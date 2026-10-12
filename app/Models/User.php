@@ -30,7 +30,7 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  */
-#[Fillable(['name', 'email', 'password'])]
+#[Fillable(['name', 'email', 'password', 'role'])]
 #[Hidden(['password', 'two_factor_secret', 'two_factor_recovery_codes', 'remember_token'])]
 class User extends Authenticatable implements FilamentUser, PasskeyUser
 {
@@ -56,6 +56,26 @@ class User extends Authenticatable implements FilamentUser, PasskeyUser
     public function canAccessPanel(Panel $panel): bool
     {
         return true;
+    }
+
+    // Métodos para verificar el rol del usuario
+    public function isAdmin(): bool
+    {
+        return $this->role === 'admin';
+    }
+    public function isRecepcionista(): bool
+    {
+        return $this->role === 'recepcionista';
+    }
+
+    public function isTecnico(): bool
+    {
+        return $this->role === 'tecnico';
+    }
+
+    public function isCliente(): bool
+    {
+        return $this->role === 'cliente';
     }
 
     /**

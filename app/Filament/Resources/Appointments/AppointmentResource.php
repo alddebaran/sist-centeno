@@ -27,6 +27,15 @@ class AppointmentResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'Citas';
 
+    public static function canAccess(): bool
+    {
+        /** @var \App\Models\User|null $user */
+        $user = auth()->user();
+
+        // Admin y Recepcionista pueden ver la Agenda de Citas
+        return $user && in_array($user->role, ['admin', 'recepcionista']);
+    }
+
     public static function form(Schema $schema): Schema
     {
         return AppointmentForm::configure($schema);
