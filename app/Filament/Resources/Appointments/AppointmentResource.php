@@ -32,8 +32,8 @@ class AppointmentResource extends Resource
         /** @var \App\Models\User|null $user */
         $user = auth()->user();
 
-        // Admin y Recepcionista pueden ver la Agenda de Citas
-        return $user && in_array($user->role, ['admin', 'recepcionista']);
+        // Solo Admin y Recepcionista ven "Agenda de Citas"
+        return $user && ($user->isAdmin() || $user->isRecepcionista());
     }
 
     public static function form(Schema $schema): Schema

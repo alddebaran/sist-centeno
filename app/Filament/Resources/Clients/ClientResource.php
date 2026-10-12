@@ -33,8 +33,8 @@ class ClientResource extends Resource
         /** @var \App\Models\User|null $user */
         $user = auth()->user();
 
-        // Solo Admin y Recepcionista pueden ver el módulo Clientes
-        return $user && in_array($user->role, ['admin', 'recepcionista']);
+        // Solo Admin y Recepcionista ven "Clientes"
+        return $user && ($user->isAdmin() || $user->isRecepcionista());
     }
 
     public static function form(Schema $schema): Schema

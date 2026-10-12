@@ -16,4 +16,12 @@ class Vehicle extends Model
     {
         return $this->belongsTo(Client::class);
     }
+
+    /**
+     * @return HasMany<Appointment, $this>
+     */
+    public function appointments(): HasMany
+    {
+        return $this->hasMany(Appointment::class);
+    }
 }

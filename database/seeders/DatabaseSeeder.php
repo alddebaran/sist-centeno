@@ -190,5 +190,31 @@ class DatabaseSeeder extends Seeder
             'name' => 'Test User',
             'email' => 'test@example.com',
         ]);*/
+
+        // 5. Generar Diagnósticos y Mantenimientos para pruebas del Técnico
+        $mecanico = User::where('role', 'tecnico')->first();
+        $citasParaTaller = Appointment::inRandomOrder()->take(30)->get();
+
+        foreach ($citasParaTaller as $cita) {
+            $diagnostico = \App\Models\Diagnosis::create([
+                'appointment_id' => $cita->id,
+                'user_id' => $mecanico->id,
+                'details' => 'Se verificó el vehículo. Presenta desgaste en pastillas de freno y nivel bajo de lubricante.',
+                'registered_at' => $cita->appointment_date,
+            ]);
+
+            \App\Models\Maintenance::create([
+                'diagnosis_id' => $diagnostico->id,
+                'user_id' => $mecanico->id,
+                'maintenance_type' => rand(0, 1) ? 'preventivo' : 'correctivo',
+                'budgeted_cost' => 150.00,
+                'labor_cost' => 120.00,
+                'total_cost' => 270.00,
+                'procedures' => 'Cambio de filtro de aire, cambio de aceite 10W-40 y rectificación de discos.',
+                'observations' => 'Se sugiere revisión de amortiguadores en el próximo servicio.',
+                'entry_date' => Carbon::parse($cita->appointment_date)->setHour(8),
+                'delivery_date' => Carbon::parse($cita->appointment_date)->setHour(14),
+            ]);
+        }
     }
 }

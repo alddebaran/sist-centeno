@@ -32,8 +32,8 @@ class VehicleResource extends Resource
         /** @var \App\Models\User|null $user */
         $user = auth()->user();
 
-        // Admin, Recepcionista y Técnico tienen acceso
-        return $user && in_array($user->role, ['admin', 'recepcionista', 'tecnico']);
+        // Admin, Recepcionista y Técnico ven "Vehículos"
+        return $user && ($user->isAdmin() || $user->isRecepcionista() || $user->isTecnico());
     }
 
     public static function form(Schema $schema): Schema

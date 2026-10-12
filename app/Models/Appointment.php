@@ -24,4 +24,9 @@ class Appointment extends Model
     {
         return $this->belongsTo(Vehicle::class);
     }
+
+    public function diagnoses(): HasMany
+    {
+        return $this->hasMany(Diagnosis::class);
+    }
 }
