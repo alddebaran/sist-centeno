@@ -16,6 +16,7 @@ use Illuminate\Support\Str;
 use Laravel\Fortify\Contracts\PasskeyUser;
 use Laravel\Fortify\PasskeyAuthenticatable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
  * @property int $id
@@ -55,7 +56,8 @@ class User extends Authenticatable implements FilamentUser, PasskeyUser
      */
     public function canAccessPanel(Panel $panel): bool
     {
-        return true;
+        // Solo el personal del taller tiene acceso al panel administrativo de Filament
+        return in_array($this->role, ['admin', 'recepcionista', 'tecnico']);
     }
 
     // Métodos para verificar el rol del usuario
@@ -76,6 +78,11 @@ class User extends Authenticatable implements FilamentUser, PasskeyUser
     public function isCliente(): bool
     {
         return $this->role === 'cliente';
+    }
+
+    public function client(): HasOne
+    {
+        return $this->hasOne(Client::class, 'user_id');
     }
 
     /**

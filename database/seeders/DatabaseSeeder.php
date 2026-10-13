@@ -48,10 +48,16 @@ class DatabaseSeeder extends Seeder
             ]
         );
 
-        User::firstOrCreate(
+        // Crear usuario cliente
+        $usuarioCliente = User::firstOrCreate(
             ['email' => 'cliente@centeno.com'],
-            ['name' => 'Cliente Propietario', 'password' => Hash::make('password'), 'role' => 'cliente']
+            [
+                'name' => 'Juan Quispe (Cliente)',
+                'password' => Hash::make('password'),
+                'role' => 'cliente',
+            ]
         );
+
 
         // 2. Datos base con contexto local
         $nombres = [
@@ -215,6 +221,12 @@ class DatabaseSeeder extends Seeder
                 'entry_date' => Carbon::parse($cita->appointment_date)->setHour(8),
                 'delivery_date' => Carbon::parse($cita->appointment_date)->setHour(14),
             ]);
+
+
+            // Vincular al primer cliente de la lista con este usuario
+            if ($primerCliente = Client::first()) {
+                $primerCliente->update(['user_id' => $usuarioCliente->id]);
+            }
         }
     }
 }
