@@ -179,14 +179,8 @@ new class extends Component
         {{-- 1. HEADER CON SALUDO Y CTA --}}
         <header class="bg-white dark:bg-zinc-900 rounded-2xl p-5 sm:p-6 border border-zinc-200/80 dark:border-zinc-800 shadow-xs flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
             <div class="space-y-1">
-                <div class="flex items-center gap-2">
-                    <span class="inline-flex items-center justify-center w-7 h-7 rounded-lg bg-primary-600 text-white font-bold text-xs shadow-xs">
-                        AC
-                    </span>
-                    <span class="text-xs font-semibold uppercase tracking-wider text-zinc-500">Automotriz Centeno</span>
-                </div>
                 <h1 class="text-xl sm:text-2xl font-bold tracking-tight">
-                    Hola, {{ explode(' ', trim(auth()->user()->name))[0] }} 👋
+                    Hola, {{ explode(' ', trim(auth()->user()->name))[0] }}
                 </h1>
                 <p class="text-xs sm:text-sm text-zinc-500">
                     Historial electrónico y seguimiento técnico de tus vehículos.

@@ -31,7 +31,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  */
-#[Fillable(['name', 'email', 'password', 'role'])]
+#[Fillable(['name', 'email', 'password', 'role', 'status'])]
 #[Hidden(['password', 'two_factor_secret', 'two_factor_recovery_codes', 'remember_token'])]
 class User extends Authenticatable implements FilamentUser, PasskeyUser
 {
@@ -56,8 +56,17 @@ class User extends Authenticatable implements FilamentUser, PasskeyUser
      */
     public function canAccessPanel(Panel $panel): bool
     {
+        // Si el usuario está inactivo, no puede acceder a ningún panel
+        if ($this->status !== 'activo') {
+            return false;
+        }
         // Solo el personal del taller tiene acceso al panel administrativo de Filament
         return in_array($this->role, ['admin', 'recepcionista', 'tecnico']);
+    }
+
+    public function isActive(): bool
+    {
+        return $this->status === 'activo';
     }
 
     // Métodos para verificar el rol del usuario
