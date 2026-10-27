@@ -2,12 +2,14 @@
 
 namespace App\Filament\Resources\Diagnoses\Tables;
 
+use App\Models\Client;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Tables\Table;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
+use Illuminate\Database\Eloquent\Builder;
 
 class DiagnosesTable
 {
@@ -45,6 +47,26 @@ class DiagnosesTable
             ])
             ->defaultSort('registered_at', 'desc')
             ->filters([
+                SelectFilter::make('client_id')
+                    ->label('Filtrar por Cliente')
+                    ->searchable()
+                    ->preload()
+                    ->options(fn () => Client::query()
+                        ->orderBy('apellidos')
+                        ->get()
+                        ->mapWithKeys(fn (Client $client) => [
+                            $client->id => "{$client->numero_documento} — {$client->apellidos}, {$client->nombres}",
+                        ])
+                    )
+                    ->query(function (Builder $query, array $data) {
+                        return $query->when(
+                            $data['value'],
+                            fn (Builder $query, $clientId) => $query->whereHas(
+                                'appointment',
+                                fn (Builder $q) => $q->where('client_id', $clientId)
+                            )
+                        );
+                    }),
                 SelectFilter::make('user_id')
                     ->label('Filtrar por Técnico')
                     ->relationship('technician', 'name'),
