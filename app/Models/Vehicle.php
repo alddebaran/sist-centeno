@@ -24,6 +24,6 @@ class Vehicle extends Model
      */
     public function appointments(): HasMany
     {
-        return $this->hasMany(Appointment::class);
+        return $this->hasMany(Appointment::class)->latest('appointment_date');
     }
 }
