@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Validation\Rules\Password;
+use Carbon\Carbon;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -31,6 +32,9 @@ class AppServiceProvider extends ServiceProvider
      */
     protected function configureDefaults(): void
     {
+        Carbon::setLocale('es');
+        setlocale(LC_TIME, 'es_ES.utf8', 'es_ES', 'es_PE', 'es');
+
         Date::use(CarbonImmutable::class);
 
         DB::prohibitDestructiveCommands(
