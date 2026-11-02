@@ -18,4 +18,16 @@ class Maintenance extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+
+    protected static function booted(): void
+    {
+        static::created(function (Maintenance $maintenance) {
+            // Al registrar la liquidación, actualiza la cita asociada a 'finalizada'
+            if ($appointment = $maintenance->diagnosis?->appointment) {
+                $appointment->update([
+                    'status' => 'finalizada',
+                ]);
+            }
+        });
+    }
 }
