@@ -40,20 +40,12 @@
         </div>
 
         {{-- 1. HERO BALANCE CARD (Estilo característico de la demo de Flux) --}}
-        <div class="relative overflow-hidden rounded-2xl bg-zinc-700 p-6 sm:p-8 text-white shadow-xl border border-zinc-800">
+        <div class="relative overflow-hidden rounded-2xl bg-zinc-800 p-6 sm:p-8 text-white shadow-xl border border-zinc-800">
             {{-- Brillo sutil de fondo --}}
             <div class="absolute -right-16 -top-16 h-64 w-64 rounded-full bg-primary-500/15 blur-3xl pointer-events-none"></div>
 
             <div class="relative flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
                 <div class="space-y-3">
-                    <div class="flex items-center gap-2">
-                        <span class="inline-flex items-center justify-center w-6 h-6 rounded-md bg-white/10 text-xs font-bold text-white">
-                            AC
-                        </span>
-                        <span class="text-xs font-semibold uppercase tracking-wider text-zinc-400">
-                            Automotriz Centeno • Resumen de Cuenta
-                        </span>
-                    </div>
 
                     <div>
                         <div class="text-xs font-medium text-zinc-400">Inversión Total en Servicios</div>
