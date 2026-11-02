@@ -10,25 +10,27 @@
                 <flux:sidebar.collapse class="lg:hidden" />
             </flux:sidebar.header>
 
+            {{-- NAVEGACIÓN DEL CLIENTE EN EL SIDEBAR --}}
             <flux:sidebar.nav>
-                <flux:sidebar.group :heading="__('Platform')" class="grid">
+                <flux:sidebar.group heading="Portal del Propietario" class="grid">
+                    {{-- 1. Dashboard (KPIs) --}}
                     <flux:sidebar.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>
-                        {{ __('Dashboard') }}
+                        Panel Principal
+                    </flux:sidebar.item>
+
+                    {{-- 2. Mis Vehículos --}}
+                    <flux:sidebar.item icon="truck" :href="route('vehicles')" :current="request()->routeIs('vehicles')" wire:navigate>
+                        Mis Vehículos
+                    </flux:sidebar.item>
+
+                    {{-- 3. Historial de Citas y HEV --}}
+                    <flux:sidebar.item icon="calendar-days" :href="route('appointments')" :current="request()->routeIs('appointments')" wire:navigate>
+                        Historial y Citas
                     </flux:sidebar.item>
                 </flux:sidebar.group>
             </flux:sidebar.nav>
 
             <flux:spacer />
-
-            <flux:sidebar.nav>
-                <flux:sidebar.item icon="folder-git-2" href="https://github.com/laravel/livewire-starter-kit" target="_blank">
-                    {{ __('Repository') }}
-                </flux:sidebar.item>
-
-                <flux:sidebar.item icon="book-open-text" href="https://laravel.com/docs/starter-kits#livewire" target="_blank">
-                    {{ __('Documentation') }}
-                </flux:sidebar.item>
-            </flux:sidebar.nav>
 
             <x-desktop-user-menu class="hidden lg:block" :name="auth()->user()->name" />
         </flux:sidebar>
